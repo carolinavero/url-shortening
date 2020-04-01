@@ -36,7 +36,6 @@ const GlobalStyle = createGlobalStyle `
       background-color: #f0f1f6;
 
     }
-    /* Weights: 500, 700 */
 
     h1 {
       color: #333;
@@ -48,7 +47,6 @@ const GlobalStyle = createGlobalStyle `
       color: var(--gray)
     }
     .button {
-      
       margin: 0.5em 1em;
       padding: 0.25em 1em;
       font-size: 18px;
@@ -57,6 +55,9 @@ const GlobalStyle = createGlobalStyle `
     }
     .button:hover {
       opacity: .6;
+    }
+    button:focus {
+      outline: none;
     }
 
     .primary-button {
@@ -85,6 +86,7 @@ const GlobalStyle = createGlobalStyle `
       border-radius: 5px;
       font-size: 18px;
       border: none;
+      outline: none;
     }
 
     .img-fluid {
@@ -94,6 +96,17 @@ const GlobalStyle = createGlobalStyle `
       max-width: 150%;
     }
 
+    @media(min-width: 768px) {
+      h1 {
+        font-size: 4rem;
+        line-height: 90px;
+      }
+
+      .button {
+        margin: 0.5em 0;
+      }
+
+    }
 
 `;
 

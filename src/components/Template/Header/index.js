@@ -1,29 +1,30 @@
 import React from 'react'
-import styled from 'styled-components';
+import { MainContainer } from './styles';
+import { Container, Row, Col } from 'react-grid-system';
 
 import mainImg from '../../../assets/illustration-working.svg';
-
-const MainContainer = styled.div `
-    background-color: #fff;
-    padding: 30px;
-    text-align: center;
-`;
-
 
 function Header() {
     return (
 
+        <>
         <MainContainer>
-            <img src={mainImg} alt="Main" className="img-main" />
+            <Container>
+                <Row>
+                    
+                    <Col md={6} className="main-content">
+                        <h1>More than just shorter links</h1>
+                        <p>Build your brand’s recognition and get detailed insights
+        on how your links are performing.</p>
 
-            <h1>More than just shorter links</h1>
-            <p>Build your brand’s recognition and get detailed insights
-                 on how your links are performing.
-            </p>
-
-            <button className="button primary-button ">Get Started</button>
-
+                        <button className="button primary-button ">Get Started</button>
+                    </Col>
+                    <Col md={6} className="main-image"><img src={mainImg} alt="Main" className="img-main" /></Col>
+                </Row>
+            </Container>
         </MainContainer>
+
+        </>
 
     );
 }

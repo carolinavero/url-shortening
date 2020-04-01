@@ -2,22 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
-const NavContainer = styled.nav`
+export const NavContainer = styled.nav`
     border-radius: 10px;
     background-color: var(--secondary-color);
     width: 100%;
 `;
 
-const List = styled.ul`
+export const List = styled.ul`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+
     
 `;
 
-const ListItem = styled.li`
+export const ListItem = styled.li`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,6 +34,13 @@ const ListItem = styled.li`
         text-decoration: none;
         padding: 1rem 0;
         width: 100%;
+    }
+    @media(min-width: 768px) {
+            flex-direction: row;
+        a {
+            padding: .5rem 1rem;
+            color: #333;
+        }
     }
 `;
 
@@ -51,7 +59,7 @@ export default Menu  => (
             </ListItem>
         </List>
         <hr />
-        <List>
+        <List className="login-menu">
             <ListItem>
                 <Link to="/login">Login</Link>
             </ListItem>
