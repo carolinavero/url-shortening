@@ -53,8 +53,6 @@ export const MenuButton = styled.button`
 
 export const StyledPopup = styled(Popup)`
     
-   
-
     &-overlay {
         background-color: red;
     }

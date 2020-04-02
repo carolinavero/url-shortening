@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-grid-system';
 import { Form, ButtonShorten } from './styles';
 
@@ -7,29 +7,35 @@ import ResultShortly from '../ResultShortly';
 
 import api from '../../services/api';
 
-export default class Shortly extends React.Component {
-    state = {
-        url: '',
-        hashid: '',
-        isSubmitted: false
-    }
-    
+export default function Shortly (){
+    const [url, setUrl] = useState('');
+    const [hashid, setHashid] = useState('');
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const [count, setCount] = useState(0);
+    /* 
+
+    const newUrl = localStorage.getItem('url')
+    const newHashid = localStorage.getItem('hashid')
+    const [anotherUrl, setAnotherUrl] = useState(0);  */
+/*    const history = useHistory(); */
+  
+
     handleChange = (e) => {
         e.preventDefault();
         console.log("input foi clicado")
 
-        this.setState({ 
-            url: e.target.value 
+        this.setState({
+            url: e.target.value
         });
-        
-        console.log(e.target.value )
-    } 
 
-    handleSubmit = (e) =>  {
-        e.preventDefault();      
-        
+        console.log(e.target.value)
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+
         const urlTyped = this.state.url
-
         api.post(`api/links/`, { url: urlTyped })
 
             .then(res => {
@@ -43,28 +49,38 @@ export default class Shortly extends React.Component {
                 });
 
                 console.log(this.state)
- 
+                    /* JSON.stringify(this.state) */
+/*                     localStorage.setItem('@shortly-app/info', JSON.stringify(this.state));
 
-                localStorage.setItem('url', res.data.url)
+ */             localStorage.setItem('url', res.data.url)
                 localStorage.setItem('hashid', res.data.hashid)
+
+                /*       console.log("entrou no then")
+                      console.log(res)
+                      console.log(res.data.hashid);
+                      console.log(res.data.url); */
 
             })
             .catch(function (error) {
                 alert(error.response.data.url)
             })
-        
+
     }
 
- render() {
+    /*     useEffect(function persistInfo() {
+            localStorage.setItem('urlInfo', url);
+        });
+     */
+
     return (
-        
+
         <>
 
             <Container>
                 <Row>
                     <Col>
                         <Form onSubmit={this.handleSubmit}>
-                            
+
                             <Row>
                                 <Col md={9}>
                                     <input
@@ -76,23 +92,23 @@ export default class Shortly extends React.Component {
                                     />
                                 </Col>
                                 <Col md={3}>
-                                    <ButtonShorten type="submit" >Shorten It!</ButtonShorten>
+                                    <p>Você clicou {count} vezes.</p>
+                                    <ButtonShorten type="submit" onClick={() => setCount(count + 1) }>Shorten It!</ButtonShorten>
                                 </Col>
                             </Row>
-                           
+
                         </Form>
                     </Col>
                 </Row>
             </Container>
-            
-            {this.state.isSubmitted && 
-            localStorage !== null && 
-            <ResultShortly url={this.state.url} hashid={this.state.hashid} isSubmitted={this.state.isSubmitted} />} 
 
-            
+            {isSubmitted &&
+                localStorage !== null &&
+                <ResultShortly url={url} hashid={hashid} isSubmitted={isSubmitted} />}
+
+
         </>
 
-        )
+    )
 
-    }
 }

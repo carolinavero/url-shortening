@@ -87,6 +87,9 @@ const GlobalStyle = createGlobalStyle `
       font-size: 18px;
       border: none;
       outline: none;
+      .alert-danger {
+        border: 2px solid var(--alert-color);
+      }
     }
 
     .img-fluid {

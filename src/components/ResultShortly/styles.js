@@ -38,11 +38,11 @@ export const Results = styled.div`
         padding: 15px;
         border-bottom: 1px solid #ddd;
     }
-    
-    .new-link {
-        color: var(--primary-color);
+    .new-link-block {
         padding: 15px;
-        
+    }
+    .new-link {
+        color: var(--primary-color);      
     }
     a {
         color: var(--primary-color);

@@ -39,7 +39,10 @@ export const ListItem = styled.li`
             flex-direction: row;
         a {
             padding: .5rem 1rem;
-            color: #333;
+            color: #999;
+            &:hover {
+                color: #333;
+            }
         }
     }
 `;

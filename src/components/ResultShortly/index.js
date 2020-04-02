@@ -11,8 +11,8 @@ export default class ResultShortly extends React.Component {
 
     handleCopy = (e) => {
         console.log("copiou!!")
-        console.log("o link é:", this.state.hashid)
-        var copiedLink = this.state.hashid;
+        console.log("o link é:", this.props.hashid)
+        var copiedLink = this.props.hashid;
         console.log("valor na variavel", copiedLink)
         this.setState({
             copied: true
@@ -59,8 +59,6 @@ render() {
                                 </div>
 
                             </Results> 
-
-        
 
                         </Col>
                     </Row>
