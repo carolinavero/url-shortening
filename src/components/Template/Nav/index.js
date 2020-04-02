@@ -19,8 +19,6 @@ const Nav  = () => {
                         <img src={logoImg} alt="Logo" />
                                                                     
                         <Hidden xs sm className="menu-desktop">
-
-                            
                             <List>
                                 <ListItem>
                                     
