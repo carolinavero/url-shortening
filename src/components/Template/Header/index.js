@@ -10,12 +10,11 @@ function Header() {
         <>
         <MainContainer>
             <Container>
-                <Row>
-                    
+                <Row className="main-content-block">
                     <Col md={6} className="main-content">
                         <h1>More than just shorter links</h1>
                         <p>Build your brand’s recognition and get detailed insights
-        on how your links are performing.</p>
+                            on how your links are performing.</p>
 
                         <button className="button primary-button ">Get Started</button>
                     </Col>

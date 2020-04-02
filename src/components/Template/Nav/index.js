@@ -6,7 +6,6 @@ import { TopContainer, MenuButton, StyledPopup } from './styles'
  
 import logoImg from '../../../assets/logo.svg'
 
-
 const Nav  = () => {
     return (
         <>
@@ -15,12 +14,17 @@ const Nav  = () => {
          
             <Container>
                 <Row className="navbar">
-                    <Col>
+                    <Col className="navbar-items">
+
                         <img src={logoImg} alt="Logo" />
-                                                
-                        <Hidden xs sm>
+                                                                    
+                        <Hidden xs sm className="menu-desktop">
+
                             
                             <List>
+                                <ListItem>
+                                    
+                                </ListItem>
                                 <ListItem>
                                     <Link to="/">Features</Link>
                                 </ListItem>
@@ -34,13 +38,18 @@ const Nav  = () => {
 
                         </Hidden>
                     </Col>
-                    <Col>
+                    
+                    <Col className="menu-toggle">
 
-                        <Hidden md lg xl>
+                        <Hidden md lg xl >
                             <StyledPopup
+
                                 trigger={
                                     <MenuButton>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img" focusable="false"><title>Menu</title><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img" focusable="false">
+                                            <title>Menu</title>
+                                        <path stroke="currentColor" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="2" d="M4 7h22M4 15h22M4 23h22"></path>
+                                        </svg>
                                     </MenuButton>
                                 }
                                 modal
@@ -59,7 +68,7 @@ const Nav  = () => {
                                     <Link to="/login">Login</Link>
                                 </ListItem>
                                 <ListItem>
-                                    <button class="button primary-button">Sign Up</button>
+                                    <button className="button primary-button">Sign Up</button>
                                 </ListItem>
 
                             </List>

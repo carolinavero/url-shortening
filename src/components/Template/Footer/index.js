@@ -13,7 +13,7 @@ export default function Footer() {
         <>
        
         <Cta>
-            <div>Boost your links today</div>
+            <h2>Boost your links today</h2>
             <button className="button primary-button ">Get Started</button>
         </Cta>
 
@@ -23,7 +23,7 @@ export default function Footer() {
                 <Row>
                     <Col md={3}>
                         <div>
-                            <img src={logoImg} alt="Logo" />
+                            <img src={logoImg} alt="Logo" className="img-invert" />
                         </div>
 
                     </Col>

@@ -2,30 +2,59 @@ import styled from 'styled-components';
 import Popup from 'reactjs-popup';
 
 export const TopContainer = styled.nav` 
-    
-    
+    background-color: #fff;
     .navbar {
+        padding-top: 2rem;
+
+        .navbar-items {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        @media(min-width: 768px) {
+            ul {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                li {
+                    width: auto;
+                }
+            }
+            .navbar-items {
+                
+                justify-content: space-between;
+            }
+
+        }
+
+    }
+
+    .menu-toggle {
         display: flex;
-        flex-direction: row;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-end;
     }
     
     @media(min-width: 768px) {
         justify-content: space-evenly;
         flex-direction: row;
-       
     }
 `;
 
 export const MenuButton = styled.button` 
     background-color: #fff;
     border: none;
-    padding: 10px;
+    padding: 15px;
     
 `;
 
 export const StyledPopup = styled(Popup)`
+    
+   
+
     &-overlay {
         background-color: red;
     }
@@ -38,5 +67,6 @@ export const StyledPopup = styled(Popup)`
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        
     }
 `;

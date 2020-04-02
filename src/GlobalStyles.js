@@ -54,7 +54,7 @@ const GlobalStyle = createGlobalStyle `
       opacity: 1;
     }
     .button:hover {
-      opacity: .6;
+      opacity: .7;
     }
     button:focus {
       outline: none;
@@ -81,7 +81,7 @@ const GlobalStyle = createGlobalStyle `
 
     input {
       padding: 10px;
-      height: 50px;
+      height: 52px;
       width: 100%;
       border-radius: 5px;
       font-size: 18px;

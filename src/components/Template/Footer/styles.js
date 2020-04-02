@@ -16,6 +16,9 @@ export const FooterContainer = styled.footer`
         margin-bottom: .5rem;
         font-weight: 500;
     }
+    .img-invert {
+        filter: invert(1);
+    }
     ul {
         li {
             padding: .3rem 0;
@@ -30,12 +33,13 @@ export const FooterContainer = styled.footer`
                 color: var(--primary-color);
             }
         }
-
-
     }
 
     @media(min-width: 768px) {
         text-align: left;
+        h2 {
+            margin-top: 0;
+        }
     }
 `;
 
@@ -46,8 +50,11 @@ export const SocialNetwork = styled.div`
     justify-content: space-evenly;
 
     a:hover {
-        color: var(--primary-color);
+        filter: invert(61%) sepia(148%) saturate(87%) hue-rotate(160deg) brightness(118%) contrast(997%);
     }
+     @media(min-width: 768px) {
+         margin-top: 0;
+     }
 `;
 
 export const Cta = styled.div`
@@ -60,8 +67,17 @@ export const Cta = styled.div`
     padding: 3rem 1rem;
     font-size: 1.6rem;
     font-weight: 600;
+    margin-top: 4rem;
+
+    h2 {
+        font-size: 1.7rem;
+    }
 
     @media(min-width: 768px) {
         background-image: url(${bgBoostDesktop});
+        margin-top: 1rem;
+        h2 {
+            font-size: 2.5rem;
+        }
     }
 `;

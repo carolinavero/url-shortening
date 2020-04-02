@@ -10,7 +10,8 @@ export default class Shortly extends React.Component {
     state = {
         url: '',
         hashid: '',
-        copied: false
+        copied: false,
+        isSubmitted: false
     }
     
     handleChange = (e) => {
@@ -20,12 +21,13 @@ export default class Shortly extends React.Component {
         this.setState({ 
             url: e.target.value 
         });
+        
         console.log(e.target.value )
     } 
 
     handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("btn clicado")
+        e.preventDefault();      
+        localStorage.setItem('@shortly-app/username', "user");
 
         const urlTyped = this.state.url
         
@@ -41,7 +43,8 @@ export default class Shortly extends React.Component {
 
                 this.setState({
                     url: resultUrl,
-                    hashid: resultNewUrl
+                    hashid: resultNewUrl,
+                    isSubmitted: true
                 });
 
                 console.log("entrou no then")
@@ -63,6 +66,7 @@ export default class Shortly extends React.Component {
         this.setState( { 
             copied: true
         })
+       
     }
 
     render() {
@@ -73,23 +77,23 @@ export default class Shortly extends React.Component {
             <Container>
                 <Row>
                     <Col>
-                        <Form>
-                            <form onSubmit={this.handleSubmit}>
-                                <Row>
-                                    <Col md={9}>
-                                        <input
-                                            className="inputField"
-                                            type="text"
-                                            placeholder="Shorten a link here..."
-                                            name="url"
-                                            onChange={this.handleChange}
-                                        />
-                                    </Col>
-                                    <Col md={3}>
-                                        <ButtonShorten type="submit" >Shorten It!</ButtonShorten>
-                                    </Col>
-                                </Row>
-                            </form>
+                        <Form onSubmit={this.handleSubmit}>
+                            
+                            <Row>
+                                <Col md={9}>
+                                    <input
+                                        className="inputField"
+                                        type="text"
+                                        placeholder="Shorten a link here..."
+                                        name="url"
+                                        onChange={this.handleChange}
+                                    />
+                                </Col>
+                                <Col md={3}>
+                                    <ButtonShorten type="submit" >Shorten It!</ButtonShorten>
+                                </Col>
+                            </Row>
+                           
                         </Form>
                     </Col>
                 </Row>
@@ -97,33 +101,55 @@ export default class Shortly extends React.Component {
             
         
             <div className="resultContainer">
-            
-            {/* <p>bloco do resultado</p> */}
-                <ResultShortly>
 
-                    <div className="original-link"> {this.state.url}</div>
-                    <div className="separate"></div>
-                    <div className="new-link">
-                        <a href={`${this.state.hashid}`} data-link="test" >{this.state.hashid}</a>
+                <Container>
 
-                        <CopyToClipboard
-                            onCopy={this.onCopy}
-                            options={{ message: 'Copied!!' }}
-                            text={this.state.hashid}
-                        >
-                            <ButtonShorten 
-                                className="btn-small" 
-                                onClick={(e) => this.handleCopy()}>
+                   {/*  {this.state.isSubmitted.map((answer, i) => {
+                        console.log("for each")
+                        return (<ResultShortly key={i} />)
+                    })} */}
+                    <Row>
+                        <Col>
+                            
+                            {/* localStorage !== null && */}
 
-                                {this.state.copied ? <div className="copiedButton"> Copied </div> : 'Copy'}
+                            {this.state.isSubmitted && 
+                                
+                            <ResultShortly>
 
-                            </ButtonShorten>
+                                <div className="original-link"> {this.state.url}</div>
+                                <div className="separate"></div>
+                                <div className="new-link-block">
+                                    <div className="new-link">
+                                        <a href={`${this.state.hashid}`}>{this.state.hashid}</a> 
+                                    </div>
 
-                        </CopyToClipboard>
+                                    <CopyToClipboard
+                                        onCopy={this.onCopy}
+                                        options={{ message: 'Copied!!' }}
+                                        text={this.state.hashid}
+                                    >
+                                        {this.state.copied ? 
+                                            <ButtonShorten className="btn-small copiedButton" onClick={(e) => this.handleCopy()}> Copied!</ButtonShorten>
+                                            : 
+                                            <ButtonShorten
+                                                className="btn-small"
+                                                onClick={(e) => this.handleCopy()}
+                                            > Copy
+                                            </ButtonShorten>
+                                        } 
 
-                    </div>
+                                    </CopyToClipboard>
 
-                </ResultShortly>
+                                </div>
+
+                            </ResultShortly>
+
+                        }
+        
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         
         </>
