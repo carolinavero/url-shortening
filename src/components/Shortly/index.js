@@ -8,12 +8,16 @@ import ResultShortly from '../ResultShortly';
 import api from '../../services/api';
 
 export default class Shortly extends React.Component {
-    state = {
-        url: '',
-        hashid: '',
-        isSubmitted: false
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            url: '',
+            hashid: '',
+            isSubmitted: false
+        }
     }
-    
+
     handleChange = (e) => {
         e.preventDefault();
         console.log("input foi clicado")
