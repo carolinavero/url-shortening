@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import bgShortenMobile from '../../assets/bg-shorten-mobile.svg';
 import bgShortenDesktop from '../../assets/bg-shorten-desktop.svg';
 
-export const Form = styled.form`
+export const FormContainer = styled.form`
     background-color: var(--secondary-color);  
     background-repeat: no-repeat;
     background-position: right;
     background-image: url(${bgShortenMobile});
     padding: 1.5rem;
-    
     border-radius: 8px;
+
     @media(min-width: 768px) {
         background-image: url(${bgShortenDesktop});
         padding: 2.5rem;

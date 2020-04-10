@@ -99,6 +99,15 @@ const GlobalStyle = createGlobalStyle `
       max-width: 150%;
     }
 
+    .bg-item {
+        width: 100%;
+        height: 72px;
+        background-color: #fff;
+        display: flex;
+        position: absolute;
+        
+    }
+
     @media(min-width: 768px) {
       h1 {
         font-size: 4rem;

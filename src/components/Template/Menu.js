@@ -14,8 +14,6 @@ export const List = styled.ul`
     align-items: center;
     justify-content: center;
     text-align: center;
-
-    
 `;
 
 export const ListItem = styled.li`
@@ -67,7 +65,7 @@ export default Menu  => (
                 <Link to="/login">Login</Link>
             </ListItem>
             <ListItem>
-                <button class="button primary-button">Sign Up</button>
+                <button className="button primary-button">Sign Up</button>
             </ListItem>
 
         </List>

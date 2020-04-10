@@ -53,18 +53,25 @@ export const MenuButton = styled.button`
 
 export const StyledPopup = styled(Popup)`
     
+    &[style] {
+        width: 90%;
+        background-color: red;
+    }
+
     &-overlay {
         background-color: red;
     }
     &-content {
-        background-color: pink;
+       /*  background-color: pink;
         border: none;
         width: 100%;
         margin: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: center; */
+
+        width: 80%;
         
     }
 `;

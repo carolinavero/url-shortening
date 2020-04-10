@@ -1,74 +1,78 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Container, Row, Col } from 'react-grid-system';
-import { Form, ButtonShorten } from './styles';
+import { FormContainer, ButtonShorten } from './styles';
 
 import ResultShortly from '../ResultShortly';
 
 import api from '../../services/api';
 
-export default class Shortly extends React.Component {
+export default function Shortly (props) { 
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            url: '',
-            hashid: '',
-            isSubmitted: false
+    const [url, setUrl] = useState('');   
+    const [listLinks, setListLinks] = useState([]);
+
+    const getLinksFromStorage = () => JSON.parse(
+        window.localStorage.getItem("allLinks")
+    );
+
+    useEffect(() => {
+        const linksFromStorage = getLinksFromStorage();
+        console.log("links storage", linksFromStorage)
+        if (linksFromStorage) {
+            setListLinks(linksFromStorage)
+            console.log("links storage no if", linksFromStorage)
         }
+
+    }, []);
+
+    const storeLinks = link => {
+        console.log("links..", link)
+        const newLinks = [link, ...listLinks];
+        setListLinks(newLinks);
+        window.localStorage.setItem("allLinks", JSON.stringify(newLinks));
     }
 
-    handleChange = (e) => {
+    function handleChange(e) {
         e.preventDefault();
         console.log("input foi clicado")
+        setUrl({ url: e.target.value }); 
+    }
 
-        this.setState({ 
-            url: e.target.value 
-        });
-        
-        console.log(e.target.value )
-    } 
+    function handleSubmit(e) {
+        e.preventDefault();
+        console.log('handle Submit')        
+        console.log('url', url)
 
-    handleSubmit = (e) =>  {
-        e.preventDefault();      
-        
-        const urlTyped = this.state.url
-
-        api.post(`api/links/`, { url: urlTyped })
+        const result = api.post(`api/links/`, url)
 
             .then(res => {
                 var resultNewUrl = res.config.baseURL + res.data.hashid;
-                var resultUrl = res.data.url;
 
-                this.setState({
-                    url: resultUrl,
-                    hashid: resultNewUrl,
-                    isSubmitted: true
-                });
-
-                console.log(this.state)
- 
-
-                localStorage.setItem('url', res.data.url)
-                localStorage.setItem('hashid', res.data.hashid)
-
+                const link = {
+                    url: res.data.url,
+                    resultNewUrl,
+                    isSubmitted: true,
+                    copied: false
+                };
+                console.log("link no resp..", link)
+                storeLinks(link);
+            
             })
             .catch(function (error) {
-                alert(error.response.data.url)
+                alert(error.res)
             })
-        
+
     }
 
- render() {
     return (
-        
-        <>
 
+        <>
             <Container>
                 <Row>
                     <Col>
-                        <Form onSubmit={this.handleSubmit}>
-                            
+                        <FormContainer onSubmit={handleSubmit}>
+
                             <Row>
                                 <Col md={9}>
                                     <input
@@ -76,27 +80,22 @@ export default class Shortly extends React.Component {
                                         type="text"
                                         placeholder="Shorten a link here..."
                                         name="url"
-                                        onChange={this.handleChange}
+                                        onChange={handleChange}
                                     />
                                 </Col>
                                 <Col md={3}>
                                     <ButtonShorten type="submit" >Shorten It!</ButtonShorten>
                                 </Col>
                             </Row>
-                           
-                        </Form>
+
+                        </FormContainer>
                     </Col>
                 </Row>
             </Container>
-            
-            {this.state.isSubmitted && 
-            localStorage !== null && 
-            <ResultShortly url={this.state.url} hashid={this.state.hashid} isSubmitted={this.state.isSubmitted} />} 
 
+            {  <ResultShortly listLinks={listLinks} />  }
             
         </>
+    )
 
-        )
-
-    }
 }
