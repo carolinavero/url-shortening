@@ -12,6 +12,8 @@ export default function Shortly (props) {
     const [url, setUrl] = useState('');   
     const [listLinks, setListLinks] = useState([]);
 
+    console.log("url ao carregar pag", url)
+
     const getLinksFromStorage = () => JSON.parse(
         window.localStorage.getItem("allLinks")
     );
@@ -26,9 +28,10 @@ export default function Shortly (props) {
 
     }, []);
 
+ 
     const storeLinks = link => {
         console.log("links..", link)
-        const newLinks = [link, ...listLinks];
+        const newLinks = [...listLinks, link];
         setListLinks(newLinks);
         window.localStorage.setItem("allLinks", JSON.stringify(newLinks));
     }
@@ -42,10 +45,11 @@ export default function Shortly (props) {
     function handleSubmit(e) {
         e.preventDefault();
         console.log('handle Submit')        
-        console.log('url', url)
+ 
+        e.target.reset();
 
         const result = api.post(`api/links/`, url)
-
+        
             .then(res => {
                 var resultNewUrl = res.config.baseURL + res.data.hashid;
 
@@ -57,12 +61,15 @@ export default function Shortly (props) {
                 };
                 console.log("link no resp..", link)
                 storeLinks(link);
-            
+                
+                
+                console.log("url limpa...", url)
+                
             })
             .catch(function (error) {
-                alert(error.res)
+                alert("Erro no try catch")
             })
-
+     
     }
 
     return (

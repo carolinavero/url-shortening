@@ -5,31 +5,36 @@ import { Container, Row, Col } from 'react-grid-system';
 import { ButtonShorten, Results } from './styles';
 
 export default function ResultShortly({ listLinks }){
-    const [listCopies, setListCopies] = useState([false, false, true]);
-    const [lista, setLista] = useState([])
+    const [myList, setMyList] = useState([])
     
-    function handleCopy (index) {
-        console.log("copiou!!")
-        console.log("index!!", index)
+    function handleCopy (index, e) {
+        console.log("copied!!")
 
-        let item = lista[index];
+        let item = myList[index];
         item.copied = true;
-        let listCopy = lista;
+        console.log("dentro do handleCopy", myList)
+
+        let listCopy = myList;
         listCopy[index] = item;
 
-        console.log(lista[index])
-        setLista(listCopy);
+        console.log("e.target", e.target)
+
+        if(item.copied == true) {
+            e.target.style.backgroundColor = "hsl(257, 27%, 26%)";
+            e.target.innerHTML = "Copied!";
+        }
+
+        console.log(myList[index])
+        setMyList(listCopy);
        
     }
 
-    console.log("lista de links no result", lista)
-
     useEffect(() => {
-        setLista(listLinks);
-        console.log("useeffect", lista)
+        setMyList(listLinks);
+        console.log("use effect", listLinks)
     }, [listLinks])
 
-    console.log(lista);
+    console.log(myList);
 
         return (
             <>
@@ -40,7 +45,7 @@ export default function ResultShortly({ listLinks }){
                     <Row>
                         <Col>
 
-                            {lista.map((link, index) => (
+                            {myList.map((link, index) => (
                                 <Results key={index}> 
 
                                     <div className="original-link"> {link.url}</div>
@@ -54,20 +59,13 @@ export default function ResultShortly({ listLinks }){
                                            /*  onCopy={copied, true} */
                                             options={{ message: 'Copied!!' }}
                                             text={link.resultNewUrl}
-                                        >
-                                            {link.copied ?
-                                                <ButtonShorten 
-                                                    className="btn-small copiedButton" 
-                                                    onClick={(e) => handleCopy(index)}
-                                                > Copied!</ButtonShorten>
-                                                :
-                                                <ButtonShorten
-                                                    className="btn-small"
-                                                    onClick={(e) => handleCopy(index, e)}
-                                                > Copy
-                                                </ButtonShorten>
-                                            }
-
+                                        >                                     
+                                            <ButtonShorten
+                                                className="btn-small"
+                                                onClick={(e) => handleCopy(index, e)}
+                                            > Copy
+                                            </ButtonShorten>
+                                        
                                         </CopyToClipboard>
 
                                     </div>
