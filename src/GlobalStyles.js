@@ -100,12 +100,11 @@ const GlobalStyle = createGlobalStyle `
     }
 
     .bg-item {
-        width: 100%;
-        height: 72px;
-        background-color: #fff;
-        display: flex;
-        position: absolute;
-        
+      width: 100%;
+      height: 72px;
+      background-color: #fff;
+      display: flex;
+      position: absolute;
     }
 
     @media(min-width: 768px) {
