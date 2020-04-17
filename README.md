@@ -2,4 +2,4 @@
 
 ![Demo](./public/demo-shorten-api.png)
 
-[Demo](https://carolinavero.now.sh/)
+[Demo](https://url-shortening.carolinavero.now.sh/)
