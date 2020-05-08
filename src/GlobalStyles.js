@@ -85,10 +85,14 @@ const GlobalStyle = createGlobalStyle `
       width: 100%;
       border-radius: 5px;
       font-size: 18px;
-      border: none;
+      border: 2px solid transparent;
       outline: none;
-      .alert-danger {
+
+      &.alert-danger {
         border: 2px solid var(--alert-color);
+        &::placeholder {
+          color: var(--alert-color);
+        }
       }
     }
 

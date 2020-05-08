@@ -10,6 +10,7 @@ export default function Shortly (props) {
 
     const [url, setUrl] = useState('');   
     const [listLinks, setListLinks] = useState([]);
+    const [inputError, setInputError] = useState('');
 
     const getLinksFromStorage = () => JSON.parse(
         window.localStorage.getItem("allLinks")
@@ -18,7 +19,7 @@ export default function Shortly (props) {
     useEffect(() => {
         const linksFromStorage = getLinksFromStorage();
         if (linksFromStorage) {
-            setListLinks(linksFromStorage)
+            setListLinks(linksFromStorage);
         }
 
     }, []);
@@ -37,6 +38,14 @@ export default function Shortly (props) {
     function handleSubmit(e) {
         e.preventDefault(); 
         e.target.reset();
+        
+        // Empty input
+        if(!url) {
+            setInputError("Please add a link");
+            return;
+        } else {
+            setInputError('');
+        }
 
         api.post(`api/links/`, url)
         
@@ -53,7 +62,7 @@ export default function Shortly (props) {
 
             })
             .catch(function (error) {
-                alert("Error")
+                setInputError("Enter a valid URL.");        
             })
     }
 
@@ -69,15 +78,20 @@ export default function Shortly (props) {
                             <Row>
                                 <Col md={9}>
                                     <input
-                                        className="inputField"
+                                        className={inputError == '' ? "inputField" : "inputField  alert-danger"}
                                         type="text"
                                         placeholder="Shorten a link here..."
                                         name="url"
                                         onChange={handleChange}
                                     />
+                                   
+                                    <span className="error" 
+                                          style={{ color: '#F44336', fontSize: 14, fontStyle: 'italic' }}>
+                                          {inputError}
+                                    </span>
                                 </Col>
                                 <Col md={3}>
-                                    <ButtonShorten type="submit" >Shorten It!</ButtonShorten>
+                                    <ButtonShorten type="submit">Shorten It!</ButtonShorten>
                                 </Col>
                             </Row>
 

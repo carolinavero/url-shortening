@@ -11,7 +11,6 @@ export const FormContainer = styled.form`
     padding: 1.5rem;
     border-radius: 8px;
 
-    
     @media(min-width: 768px) {
         background-image: url(${bgShortenDesktop});
         padding: 2.5rem;
@@ -39,11 +38,13 @@ export const ButtonShorten = styled.button`
     &.btn-small {
         padding: .7rem 1rem;
         font-size: 16px;
+        min-width: 150px;
     }
     @media(min-width: 768px) {
         margin-top: 0;
         flex-grow: 1;
         flex-shrink: 1;
+
     }
     
 `;
